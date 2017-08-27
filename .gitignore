@@ -1,0 +1,9 @@
+
+# sbt specific
+target/
+project/target/
+project/plugins/project/
+
+# Scala-IDE specific
+.idea
+.idea_modules
