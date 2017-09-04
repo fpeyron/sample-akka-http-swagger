@@ -1,5 +1,5 @@
 organization := "io.newsbridge.sample"
-name := "akka-http-swagger"
+name := "sample-akka-http-swagger"
 version := "1.0.0"
 
 scalaVersion := "2.12.3"
@@ -14,8 +14,6 @@ libraryDependencies += "com.typesafe.akka"             %% "akka-http-spray-json"
 libraryDependencies += "com.typesafe.akka"             %% "akka-actor"             % akkaVersion
 libraryDependencies += "com.typesafe.akka"             %% "akka-stream"            % akkaVersion
 libraryDependencies += "com.typesafe.akka"             %% "akka-slf4j"             % akkaVersion
-
-//libraryDependencies += "ch.megard"                     %% "akka-http-cors"         % "0.2.1"
 
 libraryDependencies += "com.github.swagger-akka-http"  %% "swagger-akka-http"      % "0.10.1"
 libraryDependencies += "io.swagger"                    % "swagger-jaxrs"           % "1.5.16"
