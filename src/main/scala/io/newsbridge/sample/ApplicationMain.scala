@@ -1,6 +1,7 @@
 package io.newsbridge.sample
 
 import akka.actor.{ActorSystem, Props}
+import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.RouteConcatenation
 import akka.stream.ActorMaterializer
@@ -10,7 +11,6 @@ import io.newsbridge.sample.hello.{HelloActor, HelloService}
 import io.newsbridge.sample.swagger.SwaggerDocService
 
 import scala.concurrent.ExecutionContextExecutor
-import scala.io.StdIn
 
 object ApplicationMain extends App with RouteConcatenation {
 
@@ -47,13 +47,13 @@ object ApplicationMain extends App with RouteConcatenation {
 
   // start http services
   val routes = new HelloService(hello).route ~ new ContactService(contact).route ~ SwaggerDocService.routes
-  val bindingFuture = Http().bindAndHandle(routes, address, port)
+  //val bindingFuture = Http().bindAndHandle(routes, address, port)
 
-  println(s"Server online at http://$address:$port/\n" +
-    s"Swagger description http://$address:$port/api-docs/swagger.json\n" +
-    s"Press RETURN to stop...")
-  StdIn.readLine() // let it run util user presses return
-  bindingFuture
-    .flatMap(_.unbind())
-    .onComplete(_ => system.terminate())
+  // logger
+  val logger = Logging(system, getClass)
+
+  logger.info(s"Server online at http://$address:$port/\n" +
+    s"Swagger description http://$address:$port/api-docs/swagger.json\n")
+
+  Http().bindAndHandle(routes, address, port)
 }

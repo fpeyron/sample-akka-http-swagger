@@ -1,3 +1,5 @@
+import sbt.enablePlugins
+
 organization := "io.newsbridge.sample"
 name := "sample-akka-http-swagger"
 version := "1.0.0"
@@ -22,3 +24,15 @@ libraryDependencies += "io.swagger"                    % "swagger-jaxrs"        
 // ----------------
 dependencyOverrides += "com.typesafe.akka"             %% "akka-stream"      % akkaVersion
 dependencyOverrides += "com.typesafe.akka"             %% "akka-actor"       % akkaVersion
+
+
+// ----------------
+// Docker packaging
+enablePlugins(DockerPlugin, JavaAppPackaging)
+
+packageName in Docker := name.value
+version     in Docker := version.value
+maintainer in Docker := "contrib@newsbridge.io"
+dockerBaseImage := "openjdk:latest"
+dockerExposedPorts := Seq(8080)
+dockerUpdateLatest := true
