@@ -1,4 +1,4 @@
-package io.newsbridge.sample
+package fr.sysf.sample
 
 import java.time.format.DateTimeFormatter
 import java.time.{Instant, LocalDate}

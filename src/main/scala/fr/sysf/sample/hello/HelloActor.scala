@@ -1,4 +1,4 @@
-package io.newsbridge.sample.hello
+package fr.sysf.sample.hello
 
 import akka.actor.{Actor, ActorLogging}
 

@@ -1,4 +1,4 @@
-package io.newsbridge.sample
+package fr.sysf.sample
 
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model.HttpResponse

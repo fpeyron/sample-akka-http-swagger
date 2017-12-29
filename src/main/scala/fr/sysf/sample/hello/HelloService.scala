@@ -1,12 +1,12 @@
-package io.newsbridge.sample.hello
+package fr.sysf.sample.hello
 
 import javax.ws.rs.Path
 
 import akka.actor.ActorRef
 import akka.http.scaladsl.server.Directives
 import akka.util.Timeout
-import io.newsbridge.sample.DefaultJsonFormats
-import io.newsbridge.sample.hello.HelloActor._
+import fr.sysf.sample.DefaultJsonFormats
+import fr.sysf.sample.hello.HelloActor._
 import io.swagger.annotations._
 
 import scala.concurrent.ExecutionContext

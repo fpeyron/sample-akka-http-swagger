@@ -1,4 +1,4 @@
-package io.newsbridge.sample.contact
+package fr.sysf.sample.contact
 
 import javax.ws.rs.Path
 import javax.ws.rs.core.MediaType
@@ -7,8 +7,8 @@ import akka.actor.ActorRef
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives
 import akka.util.Timeout
-import io.newsbridge.sample.{CorsSupport, DefaultJsonFormats}
-import io.newsbridge.sample.contact.ContactActor.{ContactForCreation, ContactForDelete, ContactList, ContactResponse}
+import fr.sysf.sample.{CorsSupport, DefaultJsonFormats}
+import fr.sysf.sample.contact.ContactActor.{ContactForCreation, ContactForDelete, ContactList, ContactResponse}
 import io.swagger.annotations._
 
 import scala.concurrent.ExecutionContext

@@ -1,4 +1,4 @@
-package io.newsbridge.sample.contact
+package fr.sysf.sample.contact
 
 import java.time.LocalDate
 import java.util.UUID
@@ -51,7 +51,7 @@ object ContactActor {
 
 class ContactActor extends Actor with ActorLogging {
 
-  import io.newsbridge.sample.contact.ContactActor._
+  import fr.sysf.sample.contact.ContactActor._
 
   var state = Seq.empty[ContactResponse]
 

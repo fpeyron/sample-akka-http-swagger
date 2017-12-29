@@ -1,4 +1,4 @@
-package io.newsbridge.sample
+package fr.sysf.sample
 
 import akka.actor.{ActorSystem, Props}
 import akka.event.Logging
@@ -6,9 +6,9 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.RouteConcatenation
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
-import io.newsbridge.sample.contact.{ContactActor, ContactService}
-import io.newsbridge.sample.hello.{HelloActor, HelloService}
-import io.newsbridge.sample.swagger.SwaggerDocService
+import fr.sysf.sample.contact.{ContactActor, ContactService}
+import fr.sysf.sample.hello.{HelloActor, HelloService}
+import fr.sysf.sample.swagger.SwaggerDocService
 
 import scala.concurrent.ExecutionContextExecutor
 
@@ -52,8 +52,8 @@ object ApplicationMain extends App with RouteConcatenation {
   // logger
   val logger = Logging(system, getClass)
 
-  logger.info(s"Server online at http://$address:$port/\n" +
-    s"Swagger description http://$address:$port/api-docs/swagger.json\n")
+  logger.info(s"Server online at http://$address:$port/")
+  logger.info(s"Swagger description http://$address:$port/api-docs/swagger.json")
 
   Http().bindAndHandle(routes, address, port)
 }

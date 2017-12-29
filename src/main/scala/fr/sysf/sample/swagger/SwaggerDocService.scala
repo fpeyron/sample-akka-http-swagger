@@ -1,10 +1,10 @@
-package io.newsbridge.sample.swagger
+package fr.sysf.sample.swagger
 
 import com.github.swagger.akka.SwaggerHttpService
 import com.github.swagger.akka.model.Info
-import io.newsbridge.sample.CorsSupport
-import io.newsbridge.sample.contact.ContactService
-import io.newsbridge.sample.hello.HelloService
+import fr.sysf.sample.CorsSupport
+import fr.sysf.sample.contact.ContactService
+import fr.sysf.sample.hello.HelloService
 import io.swagger.models.ExternalDocs
 import io.swagger.models.auth.BasicAuthDefinition
 
