@@ -4,10 +4,10 @@ organization := "io.newsbridge.sample"
 name := "sample-akka-http-swagger"
 version := "1.0.0"
 
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.4"
 
-val akkaVersion = "2.5.4"
-val akkaHttpVersion = "10.0.9"
+val akkaVersion = "2.5.8"
+val akkaHttpVersion = "10.0.11"
 
 libraryDependencies += "com.typesafe.akka"             %% "akka-http"              % akkaHttpVersion
 libraryDependencies += "com.typesafe.akka"             %% "akka-parsing"           % akkaHttpVersion
@@ -22,8 +22,8 @@ libraryDependencies += "io.swagger"                    % "swagger-jaxrs"        
 
 
 // ----------------
-dependencyOverrides += "com.typesafe.akka"             %% "akka-stream"      % akkaVersion
-dependencyOverrides += "com.typesafe.akka"             %% "akka-actor"       % akkaVersion
+dependencyOverrides += "com.typesafe.akka"             %% "akka-stream"            % akkaVersion
+dependencyOverrides += "com.typesafe.akka"             %% "akka-actor"             % akkaVersion
 
 
 // ----------------
