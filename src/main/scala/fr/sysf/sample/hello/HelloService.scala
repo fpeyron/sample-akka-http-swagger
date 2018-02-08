@@ -1,6 +1,7 @@
 package fr.sysf.sample.hello
 
 import javax.ws.rs.Path
+import javax.ws.rs.core.MediaType
 
 import akka.actor.ActorRef
 import akka.http.scaladsl.server.Directives
@@ -11,7 +12,7 @@ import io.swagger.annotations._
 
 import scala.concurrent.ExecutionContext
 
-@Api(value = "/hello", produces = "application/json")
+@Api(value = "/hello", produces = MediaType.APPLICATION_JSON)
 @Path("/hello")
 class HelloService(helloActor: ActorRef)(implicit executionContext: ExecutionContext)
   extends Directives with DefaultJsonFormats {

@@ -12,7 +12,7 @@ import fr.sysf.sample.swagger.SwaggerDocService
 
 import scala.concurrent.ExecutionContextExecutor
 
-object ApplicationMain extends App with RouteConcatenation {
+object Main extends App with RouteConcatenation {
 
   // configurations
   val config = ConfigFactory.parseString(
@@ -46,7 +46,7 @@ object ApplicationMain extends App with RouteConcatenation {
   val contact = system.actorOf(Props[ContactActor])
 
   // start http services
-  val routes = new HelloService(hello).route ~ new ContactService(contact).route ~ SwaggerDocService.routes
+  val routes = SwaggerDocService.routes ~ new HelloService(hello).route ~ new ContactService(contact).route
   //val bindingFuture = Http().bindAndHandle(routes, address, port)
 
   // logger
