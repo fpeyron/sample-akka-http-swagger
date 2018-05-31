@@ -41,7 +41,7 @@ trait DefaultJsonFormats extends DefaultJsonProtocol with SprayJsonSupport {
     */
   implicit object UuidJsonFormat extends RootJsonFormat[UUID] {
 
-    override def write(x: UUID) = JsString(x.toString)
+    override def write(x: UUID): JsValue = JsString(x.toString)
 
     override def read(value: JsValue): UUID = value match {
       case JsString(x) => UUID.fromString(x)
@@ -54,9 +54,9 @@ trait DefaultJsonFormats extends DefaultJsonProtocol with SprayJsonSupport {
     */
   implicit object InstantJsonFormat extends RootJsonFormat[Instant] {
 
-    override def write(x: Instant) = JsString(x.toString)
+    override def write(x: Instant): JsValue = JsString(x.toString)
 
-    override def read(jsv: JsValue) = jsv match {
+    override def read(jsv: JsValue): Instant = jsv match {
       case JsString(s) if s.endsWith("Z") => Instant.parse(s)
       // Be merciful - for now. Note that Zalando JSON guidelines do NOT allow non-UTC offsets in stored data.
       case JsString(s) => Instant.from(DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(s))
@@ -68,13 +68,14 @@ trait DefaultJsonFormats extends DefaultJsonProtocol with SprayJsonSupport {
     * Instance of the ``RootJsonFormat`` for the ``j.t.LocalDate``
     */
   implicit object LocalDateJsonFormat extends RootJsonFormat[LocalDate] {
-    override def write(x: LocalDate) = JsString(x.toString)
+    override def write(x: LocalDate): JsValue = JsString(x.toString)
 
-    override def read(jsv: JsValue) = jsv match {
+    override def read(jsv: JsValue): LocalDate = jsv match {
       case JsString(s) => LocalDate.parse(s)
       // Be merciful - for now. Note that Zalando JSON guidelines do NOT allow non-UTC offsets in stored data.
       //case JsString(s) => LocalDate.from(DateTimeFormatter.ISO_OFFSET_DATE.parse(s))
       case _ => deserializationError(s"Unknown Date (ISO 8601): $jsv")
     }
   }
+
 }

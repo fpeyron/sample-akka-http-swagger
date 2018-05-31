@@ -1,43 +1,40 @@
 package fr.sysf.sample.hello
 
-import javax.ws.rs.Path
-import javax.ws.rs.core.MediaType
-
 import akka.actor.ActorRef
-import akka.http.scaladsl.server.Directives
+import akka.http.scaladsl.server.{Directives, Route}
 import akka.util.Timeout
 import fr.sysf.sample.DefaultJsonFormats
 import fr.sysf.sample.hello.HelloActor._
 import io.swagger.annotations._
-
-import scala.concurrent.ExecutionContext
+import javax.ws.rs.Path
+import javax.ws.rs.core.MediaType
+import spray.json.RootJsonFormat
 
 @Api(value = "/hello", produces = MediaType.APPLICATION_JSON)
 @Path("/hello")
-class HelloService(helloActor: ActorRef)(implicit executionContext: ExecutionContext)
-  extends Directives with DefaultJsonFormats {
+class HelloService(helloActor: ActorRef) extends Directives with DefaultJsonFormats {
 
   import akka.pattern.ask
 
   import scala.concurrent.duration._
 
-  implicit val timeout = Timeout(2.seconds)
+  implicit val timeout: Timeout = Timeout(2.seconds)
 
-  implicit val greetingFormat = jsonFormat1(Greeting)
+  implicit val greetingFormat: RootJsonFormat[Greeting] = jsonFormat1(Greeting)
 
-  val route =
-    getHello ~
-    getHelloSegment
+  val route: Route = getHello ~ getHelloSegment
 
   @ApiOperation(value = "Return Hello greeting", notes = "", nickname = "anonymousHello", httpMethod = "GET")
   @ApiResponses(Array(
     new ApiResponse(code = 200, message = "Return Hello Greeting", response = classOf[Greeting]),
     new ApiResponse(code = 500, message = "Internal server error")
   ))
-  def getHello =
+  def getHello: Route =
     path("hello") {
       get {
-        complete { (helloActor ? AnonymousHello).mapTo[Greeting] }
+        complete {
+          (helloActor ? AnonymousHello).mapTo[Greeting]
+        }
       }
     }
 
@@ -50,10 +47,12 @@ class HelloService(helloActor: ActorRef)(implicit executionContext: ExecutionCon
     new ApiResponse(code = 200, message = "Return Hello Greeting", response = classOf[Greeting]),
     new ApiResponse(code = 500, message = "Internal server error")
   ))
-  def getHelloSegment =
+  def getHelloSegment: Route =
     path("hello" / Segment) { name =>
       get {
-        complete { (helloActor ? Hello(name)).mapTo[Greeting] }
+        complete {
+          (helloActor ? Hello(name)).mapTo[Greeting]
+        }
       }
     }
 }

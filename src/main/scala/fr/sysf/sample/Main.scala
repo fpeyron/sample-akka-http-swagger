@@ -10,7 +10,7 @@ import fr.sysf.sample.contact.{ContactActor, ContactService}
 import fr.sysf.sample.hello.{HelloActor, HelloService}
 import fr.sysf.sample.swagger.SwaggerDocService
 
-import scala.concurrent.ExecutionContextExecutor
+import scala.concurrent.ExecutionContext
 
 object Main extends App with RouteConcatenation {
 
@@ -36,7 +36,7 @@ object Main extends App with RouteConcatenation {
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
   // needed for the future map/flatMap in the end
-  implicit val executionContext: ExecutionContextExecutor = system.dispatcher
+  implicit val executionContext: ExecutionContext = system.dispatcher
 
   // needed for shutdown properly
   sys.addShutdownHook(system.terminate())

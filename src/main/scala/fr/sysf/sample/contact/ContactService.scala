@@ -2,21 +2,18 @@ package fr.sysf.sample.contact
 
 import javax.ws.rs.Path
 import javax.ws.rs.core.MediaType
-
 import akka.actor.ActorRef
 import akka.http.scaladsl.model.StatusCodes
-import akka.http.scaladsl.server.Directives
+import akka.http.scaladsl.server.{Directives, Route}
 import akka.util.Timeout
 import fr.sysf.sample.{CorsSupport, DefaultJsonFormats}
 import fr.sysf.sample.contact.ContactActor.{ContactForCreation, ContactForDelete, ContactList, ContactResponse}
 import io.swagger.annotations._
 
-import scala.concurrent.ExecutionContext
-
 
 @Api(value = "/contacts", produces = MediaType.APPLICATION_JSON)
 @Path("/contacts")
-class ContactService(contactActor: ActorRef)(implicit executionContext: ExecutionContext)
+class ContactService(contactActor: ActorRef)
   extends Directives with DefaultJsonFormats with CorsSupport {
 
   import akka.pattern.ask
@@ -36,7 +33,7 @@ class ContactService(contactActor: ActorRef)(implicit executionContext: Executio
     new ApiResponse(code = 200, message = "Return list of contacts", responseContainer = "Seq", response = classOf[ContactResponse]),
     new ApiResponse(code = 500, message = "Internal server error")
   ))
-  def find = path("contacts") {
+  def find: Route = path("contacts") {
     get {
       complete {
         (contactActor ? ContactList).mapTo[Seq[ContactResponse]]
@@ -53,7 +50,7 @@ class ContactService(contactActor: ActorRef)(implicit executionContext: Executio
   @ApiImplicitParams(Array(
     new ApiImplicitParam(name = "body", value = "contact to create", required = true, dataTypeClass = classOf[ContactForCreation], paramType = "body")
   ))
-  def create = path("contacts") {
+  def create: Route = path("contacts") {
     post {
       entity(as[ContactForCreation]) { request =>
         complete {
@@ -72,7 +69,7 @@ class ContactService(contactActor: ActorRef)(implicit executionContext: Executio
   @ApiImplicitParams(Array(
     new ApiImplicitParam(name = "id", value = "id of contact to create", required = true, dataType = "string", paramType = "path")
   ))
-  def remove = delete {
+  def remove: Route = delete {
     path("contacts" / JavaUUID) { id =>
       delete {
         onSuccess(contactActor ? (ContactForDelete(id))) {

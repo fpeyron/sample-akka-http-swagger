@@ -20,7 +20,8 @@ object ContactActor {
     require(Option(email).exists(isValidEmail), s"email is not correct: $email")
     require(Option(firstName).exists(_.length > 1), s"firstname should be more 2 chars: $firstName")
     require(Option(lastName).exists(_.length > 1), s"lastname should be more 2 chars: $lastName")
-    require(birthDate.forall(x => x.isAfter(LocalDate.now.minusYears(100)) && x.isBefore(LocalDate.now.plusYears(18))), s"age should be from 18 to 100: $birthDate")
+    require(birthDate.forall(x => x.isAfter(LocalDate.now.minusYears(100)) && x.isBefore(LocalDate.now.plusYears(18))),
+      s"age should be from 18 to 100: $birthDate")
   }
 
   case class ContactForUpdate(
@@ -32,7 +33,8 @@ object ContactActor {
     require(firstName.forall(_.length > 1), s"firstname should be more 2 chars: $firstName")
     require(lastName.forall(_.length > 1), s"lastname should be more 2 chars: $lastName")
     require(email.forall(isValidEmail), s"email is not correct: $email")
-    require(birthDate.forall(x => x.isAfter(LocalDate.now.minusYears(100)) && x.isBefore(LocalDate.now.plusYears(18))), s"age should be from 18 to 100: $birthDate")
+    require(birthDate.forall(x => x.isAfter(LocalDate.now.minusYears(100)) && x.isBefore(LocalDate.now.plusYears(18))),
+      s"age should be from 18 to 100: $birthDate")
   }
 
   case class ContactForDelete(id: UUID)
@@ -92,7 +94,7 @@ class ContactActor extends Actor with ActorLogging {
       }
 
 
-    case (ContactForDelete(id: UUID)) =>
+    case ContactForDelete(id: UUID) =>
       if (!state.exists(_.id == id)) {
         sender ! new RuntimeException(s"Contact doesn't exist : $id")
       } else {
