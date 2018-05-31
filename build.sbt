@@ -4,27 +4,26 @@ import sbt.enablePlugins
 organization := "fr.sysf.sample"
 name := "sample-akka-http-swagger"
 
-scalaVersion := "2.12.4"
-
-lazy val akkaVersion = "2.5.9"
-lazy val akkaHttpVersion = "10.0.11"
-
-libraryDependencies += "com.typesafe.akka"             %% "akka-http"              % akkaHttpVersion
-libraryDependencies += "com.typesafe.akka"             %% "akka-parsing"           % akkaHttpVersion
-libraryDependencies += "com.typesafe.akka"             %% "akka-http-spray-json"   % akkaHttpVersion
-
-libraryDependencies += "com.typesafe.akka"             %% "akka-actor"             % akkaVersion
-libraryDependencies += "com.typesafe.akka"             %% "akka-stream"            % akkaVersion
-
-libraryDependencies += "com.github.swagger-akka-http"  %% "swagger-akka-http"      % "0.10.1"
-libraryDependencies += "io.swagger"                    % "swagger-jaxrs"           % "1.5.16"
-
-libraryDependencies += "ch.qos.logback"                % "logback-classic"         % "1.2.+"
+lazy val akkaVersion = "2.5.13"
+lazy val akkaHttpVersion = "10.1.1"
+lazy val akkaSwaggerVersion = "0.14.0"
+lazy val swaggerVersion = "1.5.18"
 
 // ----------------
-dependencyOverrides += "com.typesafe.akka"             %% "akka-stream"            % akkaVersion
-dependencyOverrides += "com.typesafe.akka"             %% "akka-actor"             % akkaVersion
-
+// Dependencies
+// ----------------
+// --- akka
+libraryDependencies += "com.typesafe.akka"             %% "akka-actor"                      % akkaVersion
+libraryDependencies += "com.typesafe.akka"             %% "akka-stream"                     % akkaVersion
+// --- akka http
+libraryDependencies += "com.typesafe.akka"             %% "akka-http"                       % akkaHttpVersion
+libraryDependencies += "com.typesafe.akka"             %% "akka-parsing"                    % akkaHttpVersion
+libraryDependencies += "com.typesafe.akka"             %% "akka-http-spray-json"            % akkaHttpVersion
+// --- swagger generator
+libraryDependencies += "com.github.swagger-akka-http"   %% "swagger-akka-http"              % akkaSwaggerVersion
+libraryDependencies += "io.swagger"                     % "swagger-jaxrs"                   % swaggerVersion
+// --- logger
+libraryDependencies += "ch.qos.logback"                % "logback-classic"                  % "1.2.3"
 
 
 // ----------------
@@ -52,3 +51,8 @@ maintainer                in Docker   := "technical support <florent.peyron@ext.
 dockerBaseImage            := "openjdk:8u151-jre-alpine"
 dockerExposedPorts         := Seq(8080)
 dockerUpdateLatest        := true
+
+// ----------------
+// ScalaStyle
+// ----------------
+scalastyleFailOnError := true
