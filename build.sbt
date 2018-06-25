@@ -22,8 +22,6 @@ libraryDependencies += "com.typesafe.akka"             %% "akka-http-spray-json"
 // --- swagger generator
 libraryDependencies += "com.github.swagger-akka-http"   %% "swagger-akka-http"              % akkaSwaggerVersion
 libraryDependencies += "io.swagger"                     % "swagger-jaxrs"                   % swaggerVersion
-// --- logger
-libraryDependencies += "ch.qos.logback"                % "logback-classic"                  % "1.2.3"
 
 
 // ----------------
