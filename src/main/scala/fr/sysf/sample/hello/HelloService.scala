@@ -38,7 +38,7 @@ class HelloService(helloActor: ActorRef) extends Directives with DefaultJsonForm
       }
     }
 
-  @Path("/{name}")
+  @Path("hello/{name}")
   @ApiOperation(value = "Return Hello greeting with person's name", notes = "", nickname = "hello", httpMethod = "GET")
   @ApiImplicitParams(Array(
     new ApiImplicitParam(name = "name", value = "Name of person to greet", required = false, dataType = "string", paramType = "path")
