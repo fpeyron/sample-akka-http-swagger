@@ -13,8 +13,12 @@ lazy val swaggerVersion = "1.5.18"
 // Dependencies
 // ----------------
 // --- akka
-libraryDependencies += "com.typesafe.akka"             %% "akka-actor"                      % akkaVersion
-libraryDependencies += "com.typesafe.akka"             %% "akka-stream"                     % akkaVersion
+libraryDependencies += "com.typesafe.akka"              %% "akka-actor"                     % akkaVersion
+libraryDependencies += "com.typesafe.akka"              %% "akka-stream"                    % akkaVersion
+libraryDependencies += "com.typesafe.akka"              %% "akka-cluster-sharding"          % akkaVersion
+// ---  akka-persistence
+libraryDependencies += "com.github.dnvriend"            %% "akka-persistence-inmemory"      % "2.5.1.1"
+libraryDependencies += "com.typesafe.akka"              %% "akka-persistence"               % akkaVersion
 // --- akka http
 libraryDependencies += "com.typesafe.akka"             %% "akka-http"                       % akkaHttpVersion
 libraryDependencies += "com.typesafe.akka"             %% "akka-parsing"                    % akkaHttpVersion
@@ -22,7 +26,8 @@ libraryDependencies += "com.typesafe.akka"             %% "akka-http-spray-json"
 // --- swagger generator
 libraryDependencies += "com.github.swagger-akka-http"   %% "swagger-akka-http"              % akkaSwaggerVersion
 libraryDependencies += "io.swagger"                     % "swagger-jaxrs"                   % swaggerVersion
-
+// --- logger
+libraryDependencies += "ch.qos.logback"                % "logback-classic"                  % "1.2.3"
 
 // ----------------
 // Run
